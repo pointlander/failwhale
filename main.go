@@ -103,7 +103,8 @@ func main() {
 		probability = append(probability, history.Probability())
 	}
 	for i := 0; i < 4*Depth; i++ {
-		if rand.Float64() > history.Probability() {
+		p := history.Probability()
+		if rand.Float64() > p {
 			if rand.Intn(2) == 0 {
 				history.Add(Failure)
 			} else {
@@ -112,7 +113,7 @@ func main() {
 		} else {
 			history.Add(Unknown)
 		}
-		probability = append(probability, history.Probability())
+		probability = append(probability, p)
 	}
 	for i := 0; i < Depth; i++ {
 		history.Add(Success)
